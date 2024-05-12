@@ -1,8 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Icon } from '@iconify/react';  //iconify icons
+import { getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import app from "./firebase/firebase.config"
+import { GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
+    const auth = getAuth(app);
+
+     //for storing login related error msg
+     const [error, setError] = useState();
+    //  const { user } = useContext(AuthContext);
+ 
+     const handleLogin = event => {
+ 
+         //Collecting data from email & password field 
+         setError(null);
+         event.preventDefault();
+         const form = event.target;
+         const email = form.email.value;
+         const password = form.password.value;
+ 
+         signInWithEmailAndPassword(auth, email, password)
+             .then(result => {
+                 // replave true clears browser history of path
+                 navigate(from, { replace: true });
+             })
+             .catch(error => {
+                 setError(error.message);
+             })
+ 
+     }
+
     return (
         <div>
             <div className="hero min-h-screen bg-base-200">
