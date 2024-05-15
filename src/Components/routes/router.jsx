@@ -5,6 +5,7 @@ import Home from "../Home";
 import Login from "../Login";
 import Main from "../Main";
 import Registration from "../Registration";
+import PopularClass from "../PopularClass";
 
 const router = createBrowserRouter([
   {
@@ -15,15 +16,17 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },  
-         
       {
         path: "/login",
         element: <Login></Login>,
       },  
-
       { 
-        path: "Registration",
+        path: "registration",
         element: <Registration></Registration>,
+      },  
+      { 
+        path: "popularclass",
+        element: <PopularClass></PopularClass>,
       },  
     ]
   },

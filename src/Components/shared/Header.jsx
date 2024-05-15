@@ -34,6 +34,7 @@ const Header = () => {
                             {/* {user && <li className='font-bold text-lg'><NavLink to="/mytoy">My Toys</NavLink></li>}
                             {user && <li className='font-bold text-lg'><NavLink to="/addtoy">Add A Toy</NavLink></li>} */}
                             <li className='font-bold text-lg'><NavLink to="/blog">Blog</NavLink></li>
+                            <li className='font-bold text-lg'><NavLink to="/popularclass">Popular Classes</NavLink></li>
                         </ul>
                     </div>
                     <div className="navbar-end">
