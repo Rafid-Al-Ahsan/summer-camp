@@ -6,6 +6,8 @@ import Login from "../Login";
 import Main from "../Main";
 import Registration from "../Registration";
 import PopularClass from "../PopularClass";
+import Dashboard from "../Dashboard";
+import MyCart from "../MyCart";
 
 const router = createBrowserRouter([
   {
@@ -27,9 +29,20 @@ const router = createBrowserRouter([
       { 
         path: "popularclass",
         element: <PopularClass></PopularClass>,
-      },  
+      }
     ]
   },
+  {
+    path: "dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "cart",
+        element: <MyCart></MyCart>
+      }
+    ]  
+  },
+
 ]);
 
 export default router;

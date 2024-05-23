@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+/* eslint-disable no-undef */
+import { Link, NavLink } from 'react-router-dom';
 
 const Header = () => {
     return (
@@ -35,19 +35,20 @@ const Header = () => {
                             {user && <li className='font-bold text-lg'><NavLink to="/addtoy">Add A Toy</NavLink></li>} */}
                             <li className='font-bold text-lg'><NavLink to="/blog">Blog</NavLink></li>
                             <li className='font-bold text-lg'><NavLink to="/popularclass">Popular Classes</NavLink></li>
+                            <li className='font-bold text-lg'><NavLink to="/dashboard">Dashboard</NavLink></li>
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        {/* displays user image if logged in */}
-                        {/* {user && <img
+                        displays user image if logged in
+                        {user && <img
                             src={user.photoURL}
                             alt="Profile Photo"
                             className='mx-5 rounded-full'
                             style={{ width: "3rem", height: "3rem" }}
                             title={user.displayName}
                         />}
-                        {/* Login and Logout button */}
-                        {/* {user ? <button onClick={handleLogout} className="btn bg-[#a3174f] px-8 rounded-full font-bold text-lg mr-10">Logout</button> : <Link to='login' className="btn bg-[#a3174f] px-8 rounded-full font-bold text-lg mr-10">Login</Link>}  */}
+                        {/* { Login and Logout button */}
+                         {user ? <button onClick={handleLogout} className="btn bg-[#a3174f] px-8 rounded-full font-bold text-lg mr-10">Logout</button> : <Link to='login' className="btn bg-[#a3174f] px-8 rounded-full font-bold text-lg mr-10">Login</Link>} 
                         <button  className="btn bg-[#433a3e] px-8 rounded-full font-bold text-lg mr-10">Logout</button> 
                     </div>
                 </div>
