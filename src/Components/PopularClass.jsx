@@ -1,31 +1,99 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
+import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from "../provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const PopularClass = () => {
     const [musicClasses, setMusicClasses] = useState([]);
 
-    useEffect(() => {
-        fetch('/Classes.json')
-            .then(response => response.json())
-            .then(data => {
-                // Sort the classes in descending order based on the number of students
-                const sortedClasses = data.sort((a, b) => b.Student - a.Student);
-                // Slice the sorted array to get the first six classes
-                const firstSixClasses = sortedClasses.slice(0, 6);
-                setMusicClasses(firstSixClasses);
+    const loader = useLoaderData();
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const handleAddToCart = item => {
+        // console.log(item);
+        console.log(item.ClassName);
+        const orderedClass = {classItemId: item._id, ClassName: item.ClassName, InstructorName: item.InstructorName, Email: item.Email, Price: item.Price, UserEmail: user.email} ; 
+
+        if (user && user.email) {
+           
+            fetch('http://localhost:5001/carts', {
+                method: 'POST',
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(orderedClass)
             })
-            .catch(error => console.error('Error fetching data:', error));
-    }, []);
+                .then(response => response.json())
+                .then(data => {
+                    if (data.insertedId) {
+                        Swal.fire({
+                            position: "top-end",
+                            icon: "success",
+                            title: "Your work has been saved",
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    }
+                    
+                })
+        }
+        else{
+            Swal.fire({
+                title: "Please login to add to the cart",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Login Now"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  navigate('/login', {state: {from: location}})
+                }
+              });
+        }
+        
+    }
+
+    // useEffect(() => {
+    //     fetch('/Classes.json')
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             // Sort the classes in descending order based on the number of students
+    //             const sortedClasses = data.sort((a, b) => b.Student - a.Student);
+    //             // Slice the sorted array to get the first six classes
+    //             const firstSixClasses = sortedClasses.slice(0, 6);
+    //             setMusicClasses(firstSixClasses);
+    //         })
+    //         .catch(error => console.error('Error fetching data:', error));
+    // }, []);
 
     return (
+        // <div className="flex flex-col items-center justify-center">
+        //     <p>education</p>
+        //     <p>Popular Classes</p>
+        //     <div className="grid grid-cols-3 gap-14">
+        //         {musicClasses.map(classItem => (
+        //             <Card key={classItem.Id} classItem={classItem}>
+        //                 {/* <h2>{classItem.Name}</h2>
+        //             <p>Students: {classItem.Student}</p> */}
+        //             </Card>
+        //         ))}
+        //     </div>
+        // </div>
+
         <div className="flex flex-col items-center justify-center">
             <p>education</p>
             <p>Popular Classes</p>
             <div className="grid grid-cols-3 gap-14">
-                {musicClasses.map(classItem => (
-                    <Card key={classItem.Id} classItem={classItem}>
+                {loader.map(classItem => (
+                    <Card key={classItem._id} classItem={classItem} handleAddToCart={handleAddToCart}>
                         {/* <h2>{classItem.Name}</h2>
-                    <p>Students: {classItem.Student}</p> */}
+                <p>Students: {classItem.Student}</p> */}
                     </Card>
                 ))}
             </div>
@@ -38,16 +106,17 @@ const PopularClass = () => {
 export default PopularClass;
 
 
-function Card({ classItem }) {
+function Card({ classItem, handleAddToCart }) {
 
     return (
         <div className="card w-96 bg-base-100">
-            <figure><img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
+            <figure><img src={classItem.Img} alt="Shoes" /></figure>
             <div className="card-body">
-                <h2 className="card-title">{classItem.Name}</h2>
-                <p>Time: {classItem.Time}</p>
-                <p>Days: {classItem.Day}</p>
+                <h2 className="card-title">{classItem.ClassName}</h2>
+                <p>Instructor: {classItem.InstructorName}</p>
+                <p>Email: {classItem.Email}</p>
                 <p>$ {classItem.Price} /monthly</p>
+                <button onClick={() => handleAddToCart(classItem)} className="btn bg-[#b6c278]">Add To Cart</button>
 
             </div>
         </div>

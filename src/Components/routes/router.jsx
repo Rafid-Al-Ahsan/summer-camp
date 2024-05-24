@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import {
   createBrowserRouter,
 } from "react-router-dom";
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       { 
         path: "popularclass",
         element: <PopularClass></PopularClass>,
+        loader: ({ params }) => fetch(`http://localhost:5001/classes`)
       }
     ]
   },
