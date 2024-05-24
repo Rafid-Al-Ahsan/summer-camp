@@ -5,6 +5,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom'; //for highlighting active route
 import app from '../../firebase/firebase.config';
 import { AuthContext } from '../../provider/AuthProvider';
+import { FaShoppingCart } from 'react-icons/fa';
+import useCart from '../../hooks/useCart';
 
 const Header = () => {
 
@@ -13,12 +15,15 @@ const Header = () => {
     const location = useLocation();
     const [pageTitle, setPageTitle] = useState('Home');
 
+    const [course] = useCart();
+
     const handleLogout = () => {
         signOut(auth)
             .then(() => { })
             .catch(error => { });
     };
 
+    console.log("course:", course);
     useEffect(() => {
         const path = location.pathname.substring(1);
     }, [location.pathname]);
@@ -57,6 +62,14 @@ const Header = () => {
                             <li className='font-bold text-lg'><NavLink to="/blog">Blog</NavLink></li>
                             <li className='font-bold text-lg'><NavLink to="/popularclass">Popular Classes</NavLink></li>
                             <li className='font-bold text-lg'><NavLink to="/dashboard">Dashboard</NavLink></li>
+                            <li>
+                                <Link to="">
+                                    <button className="btn">
+                                        <FaShoppingCart className="mr-2"></FaShoppingCart>
+                                        <div className="badge badge-secondary">{course.length}</div>
+                                    </button>
+                                </Link>
+                            </li>
                         </ul>
                     </div>
                     <div className="navbar-end">
