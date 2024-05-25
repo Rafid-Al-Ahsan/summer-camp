@@ -23,7 +23,6 @@ const Header = () => {
             .catch(error => { });
     };
 
-    console.log("course:", course);
     useEffect(() => {
         const path = location.pathname.substring(1);
     }, [location.pathname]);

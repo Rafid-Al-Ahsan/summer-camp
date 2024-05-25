@@ -1,11 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { createUserWithEmailAndPassword, getAuth, signOut, updateProfile  } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signOut, updateProfile } from "firebase/auth";
 import app from '../firebase/firebase.config';
 
 const Registration = () => {
-
     const [success, setSuccess] = useState(null);
     const [error, setError] = useState(null);
 
@@ -15,33 +14,48 @@ const Registration = () => {
         setSuccess('');
         setError('');
         event.preventDefault();
-        const form = event.target
-        const photo = form.photo.value
+        const form = event.target;
+        const photo = form.photo.value;
         const name = form.name.value;
         const email = form.email.value;
         const password = form.password.value;
 
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
-                setSuccess('User created sucessfully! Go to Login Page'); //display a account created mesage
-                event.target.reset(); //reset the form after succesful account created 
+                const loggedInUser = result.user;
 
-                //insert user name and photoURL
-                updateProfile(result.user, {displayName:name, photoURL: photo})
-                .then(() => { })
-                .catch((error) => { });
+                // Update user profile first
+                updateProfile(loggedInUser, { displayName: name, photoURL: photo })
+                    .then(() => {
+                        // Now the profile is updated, save the user with the correct name
+                        const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email };
+                        
+                        fetch('http://localhost:5001/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                        .then(response => response.json())
+                        .then(() => {
+                            setSuccess('User created successfully! Go to Login Page'); // Display account created message
+                            event.target.reset(); // Reset the form after successful account creation
 
-                //logout after account created    
-                signOut(auth)
-                    .then()
-                    .catch()
+                            // Logout after account created    
+                            signOut(auth)
+                                .then()
+                                .catch();
+                        });
+                    })
+                    .catch((error) => {
+                        setError(error.message);
+                    });
             })
-
             .catch(error => {
-                setError(error.message)
-            })
+                setError(error.message);
+            });
     }
-
 
     return (
         <div className="hero min-h-screen bg-base-200">
@@ -85,12 +99,9 @@ const Registration = () => {
                             <p className='text-[#bb3030]'>{error}</p>
                         </label>
                     </div>
-
                 </form>
             </div>
-
         </div>
-
     );
 };
 
