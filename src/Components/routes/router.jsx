@@ -11,6 +11,7 @@ import Dashboard from "../Dashboard";
 import MyCart from "../MyCart";
 import AddClass from "../Instructor/AddClass";
 import MyClasses from "../Instructor/MyClasses";
+import AllClasses from "../Admin/AllClasses";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,11 @@ const router = createBrowserRouter([
       {
         path: "myclass",
         element: <MyClasses></MyClasses>
+      },
+      {
+        path: "allclass",
+        element: <AllClasses></AllClasses>,
+        loader: ({ params }) => fetch('http://localhost:5001/classes')
       }
     ]  
   },
