@@ -10,6 +10,7 @@ import PopularClass from "../PopularClass";
 import Dashboard from "../Dashboard";
 import MyCart from "../MyCart";
 import AddClass from "../Instructor/AddClass";
+import MyClasses from "../Instructor/MyClasses";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "addclass",
         element: <AddClass></AddClass>
+      },
+      {
+        path: "myclass",
+        element: <MyClasses></MyClasses>
       }
     ]  
   },
