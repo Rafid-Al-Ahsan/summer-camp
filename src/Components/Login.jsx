@@ -31,6 +31,7 @@ const Login = () => {
         const password = form.password.value;
 
         signInWithEmailAndPassword(auth, email, password)
+        
             .then(result => {
                 // replave true clears browser history of path
                 navigate(from, { replace: true });
@@ -45,6 +46,17 @@ const Login = () => {
         const googleProvider = new GoogleAuthProvider();
         signInWithPopup(auth, googleProvider)
         .then(result => {
+            const loggedInUser = result.user;
+            const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email };
+                fetch('http://localhost:5001/users', {
+                            method: 'POST',
+                            headers: {
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                        .then(response => response.json())
+                        .then(data => {})
             navigate(from, { replace: true });
         })
         .catch(error => {

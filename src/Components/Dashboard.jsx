@@ -42,6 +42,7 @@ const Dashboard = () => {
                             <li><Link to="/">User Home</Link></li>
                             <li><Link to="cart">Cart</Link></li>
                             <li><a>Payment History</a></li>
+                            <li><Link to="addclass">Add Class</Link></li>
                             <li><a>Home</a></li>
                             <li><a>Courses</a></li>
                             <li><a>Contact</a></li>
