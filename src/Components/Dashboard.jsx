@@ -43,8 +43,8 @@ const Dashboard = () => {
                             <li><Link to="cart">Cart</Link></li>
                             <li><a>Payment History</a></li>
                             <li><Link to="addclass">Add Class</Link></li>
-                            <li><Link to="myclass">My Class</Link></li>
-                            <li><Link to="allclass">All Class</Link></li>
+                            <li><Link to="myclass">My Classes</Link></li>
+                            <li><Link to="allclass">All Classes</Link></li>
                             <li><a>Home</a></li>
                             <li><a>Courses</a></li>
                             <li><a>Contact</a></li>

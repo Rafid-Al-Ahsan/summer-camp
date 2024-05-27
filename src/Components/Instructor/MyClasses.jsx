@@ -19,30 +19,46 @@ const MyClasses = () => {
     return (
         <div>
             <p className='text-center my-5 text-xl font-bold'>Classes of: {user?.displayName}</p>
-            <div className='flex w-[95%] m-auto'>
-               
-                <div className='w-[85%] grid sm:grid-cols-1 md:grid-cols-2 m-auto'>
-                    {courses.map(course => <Card key={course._id} course={course}></Card>)}
-                    
+            <div className="overflow-x-auto">
+                    <table className="table">
+                        {/* head */}
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Class Name</th>
+                                <th>Instructor Name</th>
+                                <th>Email</th>
+                                <th>Price</th>
+                                <th>Seats</th>
+                                <th>Students</th>
+                                <th>Status</th>
+                                <th>Feedback from Admin</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+
+                            {courses.map((course, index) => <tr key={course._id}>
+                                <th>
+                                    {index+1}
+                                </th>
+                                <td>{course.ClassName}</td>
+                                <td>{course.InstructorName}</td>
+                                <td>{course.Email}</td>
+                                <td>${course.Price}</td>
+                                <td>{course.Seats}</td>
+                                <td>{course.TotalStudent}</td>
+                                <td className='text-[#ffc107]'>{course.Status}</td>
+                                <td>{course.Feedback}</td>
+                                
+                            </tr>
+
+                            )}
+                        </tbody>
+                    </table>
                 </div>
-            </div>
         </div>
     );
 };
 
 export default MyClasses;
-
-function Card({ course }) {
-    return (
-        <div className="card lg:card-side bg-base-100 shadow-xl mb-10">
-            <figure><img src={course.Img} alt="Album" className='w-[80%] h-60' /></figure>
-            <div className="card-body">
-                <h2 className="card-title font-bold italic text-2xl">{course.ClassName}</h2>
-                <h4 className='flex text-lg text-[#a3174f]'>Price: ${course.Price}</h4>
-                <h4 className='flex text-base text-[#fff]'>Subcategory: {course.TotalStudent}</h4>
-                <p className='text-[#f4567e] italic'>{course.Seats}</p>
-                
-            </div>
-        </div>
-    )
-}
