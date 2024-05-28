@@ -128,7 +128,9 @@ const AllClasses = () => {
                                 <td>{course.InstructorName}</td>
                                 <td>{course.Seats}</td>
                                 <td>${course.Price}</td>
-                                <td>{course.Status}</td>
+                                {course.Status === "Pending" && <td className="text-[#ffc107]">{course.Status}</td>}
+                                {course.Status === "Approved" && <td className="text-[#198754]">{course.Status}</td>}
+                                {course.Status === "Denied" && <td className="text-[#dc3545]">{course.Status}</td>}
                                 
                                 {/* Approve button with conditional rendering */}
                                 <th>
@@ -146,7 +148,8 @@ const AllClasses = () => {
                                 </th>
 
                                 <th>
-                                    <button className="btn" onClick={() => openModal(course._id)}>Feedback</button>
+                                    {course.Feedback != "" ? 
+                                    <button className="btn" onClick={() => openModal(course._id)}disabled>Feedback</button> : <button className="btn" onClick={() => openModal(course._id)}>Feedback</button>}
                                 </th>
                             </tr>
                         ))}

@@ -10,7 +10,7 @@ const AddClass = () => {
     const handleAddClass = (event) => {
         event.preventDefault();
         const form = event.target;
-        const Classname = form.name.value;
+        const ClassName = form.name.value;
         const Img = form.photo.value;
         const InstructorName = form.instructorname.value;
         const Email = form.instructoremail.value;
@@ -20,7 +20,7 @@ const AddClass = () => {
         const Status = "Pending";
         const Feedback = "";
         // console.log(photo, toyname, sellername, selleremail, subcategory, price, quantity, rating, description);
-        const course = { Classname, Img, InstructorName, Email, Seats, Price, TotalStudent, Status, Feedback};
+        const course = { ClassName, Img, InstructorName, Email, Seats, Price, TotalStudent, Status, Feedback};
         console.log(course);
 
         fetch('http://localhost:5001/classes', {    
