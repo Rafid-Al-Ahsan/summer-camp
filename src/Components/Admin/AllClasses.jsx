@@ -1,7 +1,12 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import {useState } from "react";
 import { useLoaderData } from "react-router-dom";
+import Swal from "sweetalert2";
+
+// // TODO: 1) use refetch or useEffect for showing pending status
+//          2) Disable feedback button after submission 
+//          3) Put some header and colors 
 
 const AllClasses = () => {
     const loader = useLoaderData();
@@ -12,13 +17,9 @@ const AllClasses = () => {
         setFeedback(event.target.value);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = (event) => {   
         event.preventDefault();
         document.getElementById('my_modal_1').close();
-       
-
-        console.log(feedback);
-        console.log("CourseId:", selectedCourseId);
 
         const adminFeedback = {feedback} ;
 
@@ -29,15 +30,65 @@ const AllClasses = () => {
             },
             body: JSON.stringify(adminFeedback)
         })
-
-
-        
     };
 
     const openModal = (courseId) => {
         setSelectedCourseId(courseId);
         document.getElementById('my_modal_1').showModal();
     };
+
+
+    const handelApprove = (id) => {
+
+        const value = "Approved";
+        const approved = {value}; 
+
+        fetch(`http://localhost:5001/classes/status/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(approved)
+        })
+        .then(() => {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "The class has been approved",
+                showConfirmButton: false,
+                timer: 1500
+              });
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
+
+    const handelDeny = (id) => {
+
+        const value = "Denied";
+        const approved = {value}; 
+
+        fetch(`http://localhost:5001/classes/status/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(approved)
+        })
+        .then(() => {
+            Swal.fire({
+                position: "top-end",
+                icon: "error",
+                title: "The class has been denied",
+                showConfirmButton: false,
+                timer: 1500
+              });
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    }
 
     return (
         <div>
@@ -77,13 +128,23 @@ const AllClasses = () => {
                                 <td>{course.InstructorName}</td>
                                 <td>{course.Seats}</td>
                                 <td>${course.Price}</td>
-                                <td className="text-[#ffc107]">{course.Status}</td>
+                                <td>{course.Status}</td>
+                                
+                                {/* Approve button with conditional rendering */}
                                 <th>
-                                    <button className="btn bg-[#0d6efd] text-white btm-md">Approve</button>
+                                    {course.Status === "Approved" || course.Status === "Denied"? 
+                                    <button className="btn bg-[#0d6efd] text-white btm-md" onClick={() => handelApprove(course._id)} disabled>Approve</button> : 
+                                    <button className="btn bg-[#0d6efd] text-white btm-md" onClick={() => handelApprove(course._id)} >Approve</button>}
                                 </th>
+
+                                {/* Deny button with conditional rendering */}
                                 <th>
-                                    <button className="btn bg-[#dc3545] text-white btn-md">Deny</button>
+                                    {course.Status === "Approved" || course.Status === "Denied"?
+                                    <button className="btn bg-[#dc3545] text-white btn-md" onClick={() => handelDeny(course._id)}disabled>Deny</button> : 
+                                    <button className="btn bg-[#dc3545] text-white btn-md" onClick={() => handelDeny(course._id)}>Deny</button>
+                                    }
                                 </th>
+
                                 <th>
                                     <button className="btn" onClick={() => openModal(course._id)}>Feedback</button>
                                 </th>

@@ -17,10 +17,10 @@ const AddClass = () => {
         const Seats = parseInt(form.availableseats.value);
         const Price = parseFloat(form.price.value);
         const TotalStudent = 0;
-        const Status = "pending";
+        const Status = "Pending";
         const Feedback = "";
         // console.log(photo, toyname, sellername, selleremail, subcategory, price, quantity, rating, description);
-        const course = { Classname, Img, InstructorName, InstructorName, Email, Seats, Price, TotalStudent, Status, Feedback};
+        const course = { Classname, Img, InstructorName, Email, Seats, Price, TotalStudent, Status, Feedback};
         console.log(course);
 
         fetch('http://localhost:5001/classes', {    
