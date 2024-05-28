@@ -12,7 +12,7 @@ const MyClasses = () => {
     }, [courses]);
 
     const fetchCourses = async () => {
-        const response = await fetch(`http://localhost:5001/classes/${user.email}`);
+        const response = await fetch(`http://localhost:5001/classes/email/${user.email}`);
         const data = await response.json();
         setCourses(data);
     };
