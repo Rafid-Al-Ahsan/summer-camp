@@ -8,6 +8,7 @@ const MyClasses = () => {
     const { user } = useContext(AuthContext);
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
+    console.log(user);
 
     // remember to set the dependency of useEffect or else after reload the  data won't display
     useEffect(() => {

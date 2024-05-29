@@ -133,24 +133,24 @@ const AllClasses = () => {
                                 {course.Status === "Denied" && <td className="text-[#dc3545]">{course.Status}</td>}
                                 
                                 {/* Approve button with conditional rendering */}
-                                <th>
+                                <td>
                                     {course.Status === "Approved" || course.Status === "Denied"? 
                                     <button className="btn bg-[#0d6efd] text-white btm-md" onClick={() => handelApprove(course._id)} disabled>Approve</button> : 
                                     <button className="btn bg-[#0d6efd] text-white btm-md" onClick={() => handelApprove(course._id)} >Approve</button>}
-                                </th>
+                                </td>
 
                                 {/* Deny button with conditional rendering */}
-                                <th>
+                                <td>
                                     {course.Status === "Approved" || course.Status === "Denied"?
                                     <button className="btn bg-[#dc3545] text-white btn-md" onClick={() => handelDeny(course._id)}disabled>Deny</button> : 
                                     <button className="btn bg-[#dc3545] text-white btn-md" onClick={() => handelDeny(course._id)}>Deny</button>
                                     }
-                                </th>
+                                </td>
 
-                                <th>
+                                <td>
                                     {course.Feedback != "" ? 
                                     <button className="btn" onClick={() => openModal(course._id)}disabled>Feedback</button> : <button className="btn" onClick={() => openModal(course._id)}>Feedback</button>}
-                                </th>
+                                </td>
                             </tr>
                         ))}
                     </tbody>

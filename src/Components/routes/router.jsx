@@ -13,6 +13,7 @@ import AddClass from "../Instructor/AddClass";
 import MyClasses from "../Instructor/MyClasses";
 import AllClasses from "../Admin/AllClasses";
 import UpdateClass from "../Instructor/UpdateClass";
+import ManageUsers from "../Admin/ManageUsers";
 
 const router = createBrowserRouter([
   {
@@ -63,7 +64,12 @@ const router = createBrowserRouter([
         path: "updateclass/:id",
         element: <UpdateClass></UpdateClass>,
         loader: ({ params }) => fetch(`http://localhost:5001/classes/${params.id}`)
-      }
+      },
+      {
+        path: "manageusers",
+        element: <ManageUsers></ManageUsers>,
+        loader: ({ params }) => fetch('http://localhost:5001/users')
+      },
     ]  
   },
 

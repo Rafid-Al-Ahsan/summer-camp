@@ -9,8 +9,6 @@ const UpdateClass = () => {
         const form = event.target;
         const classname = form.name.value;
         const img = form.photo.value;
-        // const instructorname = form.instructorname.value;
-        // const instructoremail = form.email.value;
         const price = form.price.value;
         const seat = form.seat.value;
         const updateClass = {classname, img,  price, seat} ;

@@ -44,10 +44,12 @@ const Login = () => {
 
     const handleGoogleSignIn= () => {
         const googleProvider = new GoogleAuthProvider();
+        const role = "Student";
+
         signInWithPopup(auth, googleProvider)
         .then(result => {
             const loggedInUser = result.user;
-            const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email };
+            const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role: role };
                 fetch('http://localhost:5001/users', {
                             method: 'POST',
                             headers: {

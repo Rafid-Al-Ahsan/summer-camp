@@ -23,12 +23,13 @@ const Registration = () => {
         createUserWithEmailAndPassword(auth, email, password)
             .then((result) => {
                 const loggedInUser = result.user;
+                const role = "Student";
 
                 // Update user profile first
                 updateProfile(loggedInUser, { displayName: name, photoURL: photo })
-                    .then(() => {
+                    .then(() => {   
                         // Now the profile is updated, save the user with the correct name
-                        const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email };
+                        const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role: role };
                         
                         fetch('http://localhost:5001/users', {
                             method: 'POST',
