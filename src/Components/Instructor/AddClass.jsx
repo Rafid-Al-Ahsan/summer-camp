@@ -50,7 +50,7 @@ const AddClass = () => {
 
             <div className='w-[100%]'>
                 <form onSubmit={handleAddClass} className="card-body">
-                    <h4 className='text-2xl font-bold'>Please add a toy</h4>
+                    <h4 className='text-2xl font-bold'>Please Provide Class Information</h4>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Class Name</span>

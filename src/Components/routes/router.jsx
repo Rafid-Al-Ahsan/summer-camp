@@ -12,6 +12,7 @@ import MyCart from "../MyCart";
 import AddClass from "../Instructor/AddClass";
 import MyClasses from "../Instructor/MyClasses";
 import AllClasses from "../Admin/AllClasses";
+import UpdateClass from "../Instructor/UpdateClass";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,11 @@ const router = createBrowserRouter([
         path: "allclass",
         element: <AllClasses></AllClasses>,
         loader: ({ params }) => fetch('http://localhost:5001/classes')
+      },
+      {
+        path: "updateclass/:id",
+        element: <UpdateClass></UpdateClass>,
+        loader: ({ params }) => fetch(`http://localhost:5001/classes/${params.id}`)
       }
     ]  
   },

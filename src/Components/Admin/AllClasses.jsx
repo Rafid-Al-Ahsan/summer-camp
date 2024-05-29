@@ -23,14 +23,14 @@ const AllClasses = () => {
 
         const adminFeedback = {feedback} ;
 
-        fetch(`http://localhost:5001/classes/${selectedCourseId}`,{
+        fetch(`http://localhost:5001/classes/feedback/${selectedCourseId}`,{
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(adminFeedback)
         })
-    };
+    };  
 
     const openModal = (courseId) => {
         setSelectedCourseId(courseId);
