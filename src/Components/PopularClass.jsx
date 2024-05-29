@@ -1,18 +1,25 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { useContext, useState } from "react";
-import { useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
 
+// TODO: 1. add animation 2. Arrange accrooding to students 3. add authentication
 const PopularClass = () => {
     const [musicClasses, setMusicClasses] = useState([]);
 
-    const loader = useLoaderData();
+    // const loader = useLoaderData();
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
+
+    useEffect(() => {
+        fetch('http://localhost:5001/classes')
+        .then(response => response.json())
+        .then(data => setMusicClasses(data))
+    })
 
     const handleAddToCart = item => {
         // console.log(item);
@@ -87,10 +94,9 @@ const PopularClass = () => {
         // </div>
 
         <div className="flex flex-col items-center justify-center">
-            <p>education</p>
-            <p>Popular Classes</p>
+            <p className="text-3xl font-bold my-5 italic">Popular Classes</p>
             <div className="grid grid-cols-3 gap-14">
-                {loader.map(classItem => (
+                {musicClasses.map(classItem => (
                     <Card key={classItem._id} classItem={classItem} handleAddToCart={handleAddToCart}>
                         {/* <h2>{classItem.Name}</h2>
                 <p>Students: {classItem.Student}</p> */}
@@ -110,12 +116,12 @@ function Card({ classItem, handleAddToCart }) {
 
     return (
         <div className="card w-96 bg-base-100">
-            <figure><img src={classItem.Img} alt="Shoes" /></figure>
-            <div className="card-body">
-                <h2 className="card-title">{classItem.ClassName}</h2>
-                <p>Instructor: {classItem.InstructorName}</p>
-                <p>Email: {classItem.Email}</p>
-                <p>$ {classItem.Price} /monthly</p>
+            <figure><img  className="w-96 h-60" src={classItem.Img} alt="Shoes" /></figure>
+            <div className="card-body text-center">
+                <h2 className="font-bold text-lg">{classItem.ClassName}</h2>
+                <p><span className="text-[#d74949]">Instructor:</span> {classItem.InstructorName}</p>
+                <p><span className="text-[#d74949]">Email:</span> {classItem.Email}</p>
+                <p>$ {classItem.Price}/monthly </p>
                 <button onClick={() => handleAddToCart(classItem)} className="btn bg-[#b6c278]">Add To Cart</button>
 
             </div>

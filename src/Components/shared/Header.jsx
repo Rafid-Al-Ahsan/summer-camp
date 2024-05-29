@@ -7,13 +7,14 @@ import app from '../../firebase/firebase.config';
 import { AuthContext } from '../../provider/AuthProvider';
 import { FaShoppingCart } from 'react-icons/fa';
 import useCart from '../../hooks/useCart';
+import logo from "../../../public/logo2.jpg"
 
 const Header = () => {
 
     const { user } = useContext(AuthContext);
     const auth = getAuth(app);
     const location = useLocation();
-    const [pageTitle, setPageTitle] = useState('Home');
+    const [navbarStyle, setNavbarStyle] = useState('bg-transparent');
 
     const [course] = useCart();
 
@@ -24,13 +25,24 @@ const Header = () => {
     };
 
     useEffect(() => {
-        const path = location.pathname.substring(1);
-    }, [location.pathname]);
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setNavbarStyle('bg-gray-800 bg-opacity-90');
+            } else {
+                setNavbarStyle('bg-transparent');
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     return (
         <div>
-            <div>
-                <div className="navbar bg-[#b9ebe6] text-white">
+            <div className={`fixed w-full z-10 transition duration-300 ease-in-out ${navbarStyle}`}>
+                <div className="navbar text-white">
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -38,34 +50,34 @@ const Header = () => {
                             </div>
                             {/* Small device responsive links */}
                             <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                                <li><NavLink to="/" className="active">Home</NavLink></li>
-                                <li><NavLink to="/alltoy" className="active">All Toys</NavLink></li>
-                                {/* {user && <li><NavLink to="/mytoy" className="active">My Toys</NavLink></li>}
-                                {user && <li><NavLink to="/addtoy" className="active">Add A Toy</NavLink></li>} */}
-                                <li><NavLink to="/mytoy" className="active">My Toys</NavLink></li>
-                                <li><NavLink to="/mytoy" className="active">My Toys</NavLink></li>
-                                <li><NavLink to="/blog" className="active">Blog</NavLink></li>
-                            </ul>
-                        </div>
-                        {/* Logo title */}
-                        <img src='https://i.ibb.co/LNJ15zY/logo.png' alt="" className='w-16' />
-                        <h1 className="text-3xl font-bold p-2 text-[#fff] bg-[#cb191f]"></h1>
-                    </div>
-                    {/* Large device responsive links */}
-                    <div className="navbar-center hidden lg:flex">
-                        <ul className="menu menu-horizontal px-1">
-                            <li className='font-bold text-lg active'><NavLink to="/" className="my-link">Home</NavLink></li>
-                            <li className='font-bold text-lg'><NavLink to="/alltoy" >All Toys</NavLink></li>
-                            {/* {user && <li className='font-bold text-lg'><NavLink to="/mytoy">My Toys</NavLink></li>}
-                            {user && <li className='font-bold text-lg'><NavLink to="/addtoy">Add A Toy</NavLink></li>} */}
-                            <li className='font-bold text-lg'><NavLink to="/blog">Blog</NavLink></li>
-                            <li className='font-bold text-lg'><NavLink to="/popularclass">Popular Classes</NavLink></li>
-                            <li className='font-bold text-lg'><NavLink to="/dashboard">Dashboard</NavLink></li>
-                            <li>
+                                <li><Link to="/" className="active">Home</Link></li>
+                                <li><Link to="/popularclass" className="active">Popular Classes</Link></li>
+                                <li><Link to="/dashboard" className="active">Dashboard</Link></li>
+                                <li>
                                 <Link to="">
                                     <button className="btn">
                                         <FaShoppingCart className="mr-2"></FaShoppingCart>
                                         <div className="badge badge-secondary">{course.length}</div>
+                                    </button>
+                                </Link>
+                            </li>
+                            </ul>
+                        </div>
+                        {/* Logo title */}
+                        <img src={logo} alt="" className='w-16 h-16' />
+                        <p className="text-lg font-bold p-2 text-[#fff] ">Melody Academy</p>
+                    </div>
+                    {/* Large device responsive links */}
+                    <div className="navbar-center hidden lg:flex">
+                        <ul className="menu menu-horizontal px-1">
+                            <li className='font-bold text-lg active'><Link to="/" className="my-link">Home</Link></li>
+                            <li className='font-bold text-lg'><Link to="/popularclass">Popular Classes</Link></li>
+                            <li className='font-bold text-lg'><Link to="/dashboard">Dashboard</Link></li>
+                            <li>
+                                <Link to="/cart">
+                                    <button className="btn">
+                                        <FaShoppingCart className="mr-2"></FaShoppingCart>
+                                        <div className="badge bg-secondary">{course.length}</div>
                                     </button>
                                 </Link>
                             </li>
@@ -81,7 +93,7 @@ const Header = () => {
                             title={user.displayName}
                         />}
                         {/* Login and Logout button */}
-                        {user ? <button onClick={handleLogout} className="btn bg-[#a3174f] px-8 rounded-full font-bold text-lg mr-10">Logout</button> : <Link to='login' className="btn bg-[#a3174f] px-8 rounded-full font-bold text-lg mr-10">Login</Link>}
+                        {user ? <button onClick={handleLogout} className="btn bg-primary1 px-8 rounded-full font-bold text-lg mr-10 text-white">Logout</button> : <Link to='login' className="btn bg-primary1 px-8 rounded-full font-bold text-lg mr-10 text-white">Login</Link>}
                     </div>
                 </div>
             </div>

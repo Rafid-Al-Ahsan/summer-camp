@@ -7,9 +7,9 @@ const Home= () => {
     return (
         <div>
             <Banner></Banner>
-            {/* <PopularClass></PopularClass> */}
-            <PopularInstructors></PopularInstructors>
-            <Testimonial></Testimonial>
+            <PopularClass></PopularClass>
+            {/* <PopularInstructors></PopularInstructors> */}
+            {/* <Testimonial></Testimonial> */}
         </div>
     );
 };
