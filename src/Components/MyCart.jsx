@@ -1,4 +1,3 @@
-
 import { FaTrashAlt } from "react-icons/fa";
 import useCart from "../hooks/useCart";
 import { Link } from "react-router-dom";
@@ -6,7 +5,7 @@ import Swal from "sweetalert2";
 
 const MyCart = () => {
 
-    const [classes] = useCart();
+    const [classes,refetch] = useCart();
 
     const handleDelete = async (id, name) => {
 
@@ -21,8 +20,9 @@ const MyCart = () => {
             console.log(data);
 
             if (data.deletedCount > 0) {
-
+                refetch();
                 Swal.fire("Class has been deleted from your wishlish!");
+                
                 
             }
         }

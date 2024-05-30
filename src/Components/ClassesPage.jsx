@@ -5,10 +5,13 @@
     import { useLocation, useNavigate } from 'react-router-dom';
     import { AuthContext } from "../provider/AuthProvider";
     import Swal from "sweetalert2";
+import useCart from "../hooks/useCart";
 
 const ClassesPage = () => {
     // TODO: If the user is not logged in, then tell the user to log in before selecting the course. This button will be disabled if: // Available seats are 0 Logged in as admin/instructor
     const [musicClasses, setMusicClasses] = useState([]);
+
+    const [, refetch] = useCart();
     
         const { user } = useContext(AuthContext);
         const navigate = useNavigate();
@@ -35,6 +38,7 @@ const ClassesPage = () => {
                     .then(response => response.json())
                     .then(data => {
                         if (data.insertedId) {
+                            refetch();
                             Swal.fire({
                                 position: "top-end",
                                 icon: "success",

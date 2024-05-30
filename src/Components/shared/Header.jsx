@@ -78,7 +78,7 @@ const Header = () => {
                                 <Link to="/dashboard/cart">
                                     <button className="btn">
                                         <FaShoppingCart className="mr-2"></FaShoppingCart>
-                                        <div className="badge bg-secondary">{course.length}</div>
+                                        <div className="badge bg-secondary">{course.length || 0}</div>
                                     </button>
                                 </Link>
                             </li>}
