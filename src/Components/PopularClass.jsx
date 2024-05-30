@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from "../provider/AuthProvider";
 import Swal from "sweetalert2";
 
-// TODO: 1. add animation 2. Arrange accrooding to students 3. add authentication
+// TODO: 1. add animation 2. Arrange accrooding to students 3. add authentication 4. if students equal disable enrolll
 const PopularClass = () => {
     const [musicClasses, setMusicClasses] = useState([]);
 

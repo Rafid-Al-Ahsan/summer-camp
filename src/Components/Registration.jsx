@@ -29,7 +29,7 @@ const Registration = () => {
                 updateProfile(loggedInUser, { displayName: name, photoURL: photo })
                     .then(() => {   
                         // Now the profile is updated, save the user with the correct name
-                        const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role: role };
+                        const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role: role, img: photo };
                         
                         fetch('http://localhost:5001/users', {
                             method: 'POST',

@@ -49,7 +49,9 @@ const Login = () => {
         signInWithPopup(auth, googleProvider)
         .then(result => {
             const loggedInUser = result.user;
-            const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role: role };
+            const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role: role, img: loggedInUser.
+                photoURL};
+                
                 fetch('http://localhost:5001/users', {
                             method: 'POST',
                             headers: {
