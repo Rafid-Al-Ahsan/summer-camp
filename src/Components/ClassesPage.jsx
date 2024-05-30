@@ -22,7 +22,7 @@ const ClassesPage = () => {
 
 
         const handleAddToCart = item => {
-            const orderedClass = { classItemId: item._id, ClassName: item.ClassName, InstructorName: item.InstructorName, Email: item.Email, Price: item.Price };
+            const orderedClass = { classItemId: item._id, ClassName: item.ClassName, InstructorName: item.InstructorName, Email: item.Email, Price: item.Price, UserEmail: user.email };
     
             if (user && user.email) {
                 fetch('http://localhost:5001/carts', {
