@@ -101,6 +101,7 @@ const AllClasses = () => {
                             <th>Course Name</th>
                             <th>Instructor Name</th>
                             <th>No of Seats</th>
+                            <th>Students</th>
                             <th>Price</th>
                             <th>Status</th>
                             <th></th>
@@ -127,6 +128,7 @@ const AllClasses = () => {
                                 </td>
                                 <td>{course.InstructorName}</td>
                                 <td>{course.Seats}</td>
+                                <td>{course.TotalStudent}</td>
                                 <td>${course.Price}</td>
                                 {course.Status === "Pending" && <td className="text-[#ffc107]">{course.Status}</td>}
                                 {course.Status === "Approved" && <td className="text-[#198754]">{course.Status}</td>}

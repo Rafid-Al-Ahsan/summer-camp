@@ -18,7 +18,7 @@ const Testimonial = () => {
 
     return (
         <div>
-            <div className='my-12 bg-cover bg-center h-[38rem] ' style={{ backgroundImage: `url('https://images.unsplash.com/photo-1465847899084-d164df4dedc6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')` }}>
+            <div className='mt-12 bg-cover bg-center h-[38rem] ' style={{ backgroundImage: `url('https://images.unsplash.com/photo-1465847899084-d164df4dedc6?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')` }}>
                 {design}
                 <div className='absolute text-center w-full italic text-[#f3efef] pt-16'>
                     <p className='text-3xl font-bold text-[#fdda9b]'>testimonials</p>
