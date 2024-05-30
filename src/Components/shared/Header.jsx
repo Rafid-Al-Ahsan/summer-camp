@@ -20,7 +20,10 @@ const Header = () => {
 
     const handleLogout = () => {
         signOut(auth)
-            .then(() => { })
+            .then(() => { 
+                // removing json acces token
+                localStorage.removeItem('user-access-token');
+            })
             .catch(error => { });
     };
 

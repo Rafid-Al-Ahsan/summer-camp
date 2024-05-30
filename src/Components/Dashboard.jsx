@@ -1,6 +1,6 @@
 
 import { Link, Outlet } from "react-router-dom";
-import { FaHome, FaShoppingCart, MdPayment  } from "react-icons/fa";
+import { FaHome, FaShoppingCart, FaMoneyBill, FaUser,  FaBook  } from "react-icons/fa";
 
 const Dashboard = () => {
     return (
@@ -40,16 +40,16 @@ const Dashboard = () => {
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                         <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                             {/* Sidebar content here */}
-                            <li className="text-md font-bold"><Link to="/"><FaHome className="text-2xl"/> User Home</Link></li>
-                            <li><Link to="cart"><FaShoppingCart /> Cart</Link></li>
-                            <li><Link to=""><MdPayment /> Payment History</Link></li>
-                            <li><Link to="addclass">Add Class</Link></li>
-                            <li><Link to="myclass">My Classes</Link></li>
-                            <li><Link to="allclass">All Classes</Link></li>
-                            <li><Link to="manageusers">Manage Users</Link></li>
-                            <li><a>Home</a></li>
+                            <li className="text-md font-bold"><Link to="/"><FaHome className="text-lg"/> User Home</Link></li>
+                            <li><Link to="cart"><FaShoppingCart className="text-lg" /> Cart</Link></li>
+                            <li><Link to=""  ><FaMoneyBill className="text-lg" />Payment History</Link></li>
+                            <li><Link to="addclass"><FaBook className="text-lg" /> Add Class</Link></li>
+                            <li><Link to="myclass"><FaBook className="text-lg" /> My Classes</Link></li>
+                            <li><Link to="allclass"><FaBook className="text-lg" /> All Classes</Link></li>
+                            <li><Link to="manageusers"><FaUser className="text-lg"/>   Manage Users</Link></li>
+                            {/* <li><a>Home</a></li>
                             <li><a>Courses</a></li>
-                            <li><a>Contact</a></li>
+                            <li><a>Contact</a></li> */}
                         </ul>
 
                     </div>

@@ -33,6 +33,26 @@ const Login = () => {
         signInWithEmailAndPassword(auth, email, password)
         
             .then(result => {
+
+                // json web token(jwt)
+                const user = result.user;
+                const loggedUser = {
+                    email: user.email
+                }
+                fetch('http://localhost:5001/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(loggedUser)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    // setting token in localStroage, better to set it in http cookie
+                    localStorage.setItem('user-access-token', data.token);
+                })// end of (jwt)
+
                 // replave true clears browser history of path
                 navigate(from, { replace: true });
             })
@@ -51,6 +71,26 @@ const Login = () => {
             const loggedInUser = result.user;
             const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role: role, img: loggedInUser.
                 photoURL};
+
+                // json web token jwt
+                const loggedUserEmail = {
+                    email : loggedInUser.email
+                }
+
+                fetch('http://localhost:5001/jwt', {
+                    method: 'POST',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(loggedUserEmail)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    // setting token in localStroage, better to set it in http cookie
+                    localStorage.setItem('user-access-token', data.token);
+                })// end of (jwt)
+                
                 
                 fetch('http://localhost:5001/users', {
                             method: 'POST',
