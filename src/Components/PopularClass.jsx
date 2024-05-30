@@ -18,7 +18,8 @@
                 .then(response => response.json())
                 .then(data => setMusicClasses(data))
         }, []); // Add an empty dependency array to run the effect only once after the component mounts
-    
+
+
         const handleAddToCart = item => {
             const orderedClass = { classItemId: item._id, ClassName: item.ClassName, InstructorName: item.InstructorName, Email: item.Email, Price: item.Price, UserEmail: user.email };
     

@@ -6,7 +6,6 @@ import Home from "../Home";
 import Login from "../Login";
 import Main from "../Main";
 import Registration from "../Registration";
-import PopularClass from "../PopularClass";
 import Dashboard from "../Dashboard";
 import MyCart from "../MyCart";
 import AddClass from "../Instructor/AddClass";
@@ -14,6 +13,7 @@ import MyClasses from "../Instructor/MyClasses";
 import AllClasses from "../Admin/AllClasses";
 import UpdateClass from "../Instructor/UpdateClass";
 import ManageUsers from "../Admin/ManageUsers";
+import InstructorPage from "../InstructorPage";
 
 const router = createBrowserRouter([
   {
@@ -33,9 +33,8 @@ const router = createBrowserRouter([
         element: <Registration></Registration>,
       },  
       { 
-        path: "popularclass",
-        element: <PopularClass></PopularClass>,
-        loader: ({ params }) => fetch(`http://localhost:5001/classes`)
+        path: "instructorpage",
+        element: <InstructorPage></InstructorPage>
       }
     ]
   },

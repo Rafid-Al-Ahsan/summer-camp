@@ -71,7 +71,7 @@ const Header = () => {
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal px-1">
                             <li className='font-bold text-lg active'><Link to="/" className="my-link">Home</Link></li>
-                            <li className='font-bold text-lg'><Link to="/popularclass">Popular Classes</Link></li>
+                            <li className='font-bold text-lg'><Link to="/instructorpage">Instructors Page</Link></li>
                             <li className='font-bold text-lg'><Link to="/dashboard">Dashboard</Link></li>
                             <li>
                                 <Link to="/cart">
