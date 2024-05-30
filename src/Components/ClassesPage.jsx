@@ -22,7 +22,7 @@ const ClassesPage = () => {
 
 
         const handleAddToCart = item => {
-            const orderedClass = { classItemId: item._id, ClassName: item.ClassName, InstructorName: item.InstructorName, Email: item.Email, Price: item.Price, UserEmail: user.email };
+            const orderedClass = { classItemId: item._id, ClassName: item.ClassName, InstructorName: item.InstructorName, Email: item.Email, Price: item.Price };
     
             if (user && user.email) {
                 fetch('http://localhost:5001/carts', {
@@ -44,7 +44,8 @@ const ClassesPage = () => {
                             });
                         }
                     })
-            } else {
+            } 
+            else {
                 Swal.fire({
                     title: "Please login to add to the cart",
                     icon: "warning",

@@ -73,15 +73,15 @@ const Header = () => {
                             <li className='font-bold text-lg active '><Link to="/" className="my-link">Home</Link></li>
                             <li className='font-bold text-lg'><Link to="/classespage">Classes Page</Link></li>
                             <li className='font-bold text-lg'><Link to="/instructorpage">Instructors Page</Link></li>
-                            <li className='font-bold text-lg'><Link to="/dashboard">Dashboard</Link></li>
-                            <li>
-                                <Link to="/cart">
+                            { user && <li className='font-bold text-lg'><Link to="/dashboard">Dashboard</Link></li>}
+                            {user && <li>
+                                <Link to="/dashboard/cart">
                                     <button className="btn">
                                         <FaShoppingCart className="mr-2"></FaShoppingCart>
                                         <div className="badge bg-secondary">{course.length}</div>
                                     </button>
                                 </Link>
-                            </li>
+                            </li>}
                         </ul>
                     </div>
                     <div className="navbar-end">
