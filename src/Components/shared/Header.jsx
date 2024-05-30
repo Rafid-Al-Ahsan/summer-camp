@@ -70,7 +70,8 @@ const Header = () => {
                     {/* Large device responsive links */}
                     <div className="navbar-center hidden lg:flex">
                         <ul className="menu menu-horizontal px-1">
-                            <li className='font-bold text-lg active'><Link to="/" className="my-link">Home</Link></li>
+                            <li className='font-bold text-lg active '><Link to="/" className="my-link">Home</Link></li>
+                            <li className='font-bold text-lg'><Link to="/classespage">Classes Page</Link></li>
                             <li className='font-bold text-lg'><Link to="/instructorpage">Instructors Page</Link></li>
                             <li className='font-bold text-lg'><Link to="/dashboard">Dashboard</Link></li>
                             <li>

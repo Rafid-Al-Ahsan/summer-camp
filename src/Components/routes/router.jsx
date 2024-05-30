@@ -14,6 +14,7 @@ import AllClasses from "../Admin/AllClasses";
 import UpdateClass from "../Instructor/UpdateClass";
 import ManageUsers from "../Admin/ManageUsers";
 import InstructorPage from "../InstructorPage";
+import ClassesPage from "../ClassesPage";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       { 
         path: "instructorpage",
         element: <InstructorPage></InstructorPage>
+      },
+      { 
+        path: "classespage",
+        element: <ClassesPage></ClassesPage>
       }
     ]
   },
