@@ -5,9 +5,9 @@ import { AuthContext } from '../../provider/AuthProvider';
 import { Link } from 'react-router-dom';
 
 const MyClasses = () => {
-    const { user } = useContext(AuthContext);
+    const { user, loading } = useContext(AuthContext);
     const [courses, setCourses] = useState([]);
-    const [loading, setLoading] = useState(true);
+
     console.log(user);
 
     // remember to set the dependency of useEffect or else after reload the  data won't display
@@ -19,7 +19,6 @@ const MyClasses = () => {
         const response = await fetch(`http://localhost:5001/classes/email/${user.email}`);
         const data = await response.json();
         setCourses(data);
-        setLoading(false);
     };
 
     if (loading) return <div>Loading...</div>

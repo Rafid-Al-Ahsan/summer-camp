@@ -15,6 +15,7 @@ import UpdateClass from "../Instructor/UpdateClass";
 import ManageUsers from "../Admin/ManageUsers";
 import InstructorPage from "../InstructorPage";
 import ClassesPage from "../ClassesPage";
+import PrivateRoute from "../../provider/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -45,7 +46,7 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
       {
         path: "cart",
