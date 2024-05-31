@@ -6,7 +6,7 @@ const InstructorPage = () => {
     const [instructors, setInstructors] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5001/users')
+        fetch('http://localhost:5001/users/instructor')
         .then(response => response.json())
         .then(data => {
             setInstructors(data);

@@ -6,6 +6,7 @@
     import { AuthContext } from "../provider/AuthProvider";
     import Swal from "sweetalert2";
 import useCart from "../hooks/useCart";
+import axios from "axios";
 
 const ClassesPage = () => {
     // TODO: If the user is not logged in, then tell the user to log in before selecting the course. This button will be disabled if: // Available seats are 0 Logged in as admin/instructor
@@ -28,16 +29,18 @@ const ClassesPage = () => {
             const orderedClass = { classItemId: item._id, ClassName: item.ClassName, InstructorName: item.InstructorName, Email: item.Email, Price: item.Price, UserEmail: user.email };
     
             if (user && user.email) {
-                fetch('http://localhost:5001/carts', {
-                    method: 'POST',
-                    headers: {
-                        "content-type": "application/json"
-                    },
-                    body: JSON.stringify(orderedClass)
-                })
-                    .then(response => response.json())
+                // fetch('http://localhost:5001/carts', {
+                //     method: 'POST',
+                //     headers: {
+                //         "content-type": "application/json"
+                //     },
+                //     body: JSON.stringify(orderedClass)
+                // })
+                // .then(response => response.json())
+
+                axios.post('http://localhost:5001/carts', orderedClass)
                     .then(data => {
-                        if (data.insertedId) {
+                        if (data.data.insertedId) {
                             refetch();
                             Swal.fire({
                                 position: "top-end",
