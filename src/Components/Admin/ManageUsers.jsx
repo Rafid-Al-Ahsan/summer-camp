@@ -1,10 +1,22 @@
 
-import { useLoaderData } from "react-router-dom";
+import { useState } from "react";
 import Swal from "sweetalert2";
 
 const ManageUsers = () => {
 
-    const loader = useLoaderData();
+    // const loader = useLoaderData();
+    const [users, setUsers] = useState([]);
+
+   
+        fetch(`http://localhost:5001/users`, {
+            method: 'GET',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('user-access-token')}`
+            }
+        })
+        .then(response => response.json())
+        .then(data => setUsers(data))
+        
 
     const makeInstructor = (id) => {   
         const value = "Instructor";
@@ -53,11 +65,6 @@ const ManageUsers = () => {
                 console.log(error);
             })
         };  
-
-   
-
-
-   
    
 
     return (
@@ -76,7 +83,7 @@ const ManageUsers = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {loader.map((user, index) => (
+                        {users.map((user, index) => (
                             <tr key={user._id}>
                                 <th>{index + 1}</th>
                                 <td>{user.name}</td>
