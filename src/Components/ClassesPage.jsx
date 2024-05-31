@@ -11,12 +11,17 @@ import axios from "axios";
 const ClassesPage = () => {
     // TODO: If the user is not logged in, then tell the user to log in before selecting the course. This button will be disabled if: // Available seats are 0 Logged in as admin/instructor
     const [musicClasses, setMusicClasses] = useState([]);
+    const[userRole , setUserRole] = useState('');
 
     const [, refetch] = useCart();
     
         const { user } = useContext(AuthContext);
         const navigate = useNavigate();
         const location = useLocation();
+
+        fetch(`http://localhost:5001/users/${user?.email}`)
+        .then(response => response.json())
+        .then(data => setUserRole(data[0]))
     
         useEffect(() => {
             fetch('http://localhost:5001/classes')
@@ -78,7 +83,7 @@ const ClassesPage = () => {
         <p className="text-3xl font-bold my-5 italic">All Classes Offered By Melody Academy</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14">
             {sortedClasses.map(classItem => (
-                classItem.Status === 'Approved' && <Card key={classItem._id} classItem={classItem} handleAddToCart={handleAddToCart}>
+                classItem.Status === 'Approved' && <Card key={classItem._id} classItem={classItem} handleAddToCart={handleAddToCart} userRole={userRole}>
                 </Card>
             ))}
         </div>
@@ -88,7 +93,7 @@ const ClassesPage = () => {
 
 export default ClassesPage;
 
-function Card({ classItem, handleAddToCart }) {
+function Card({ classItem, handleAddToCart, userRole }) {
     return (
         <div className="card w-96 bg-base-100">
             <figure><img className="w-96 h-60" src={classItem.Img} alt="Class" /></figure>
@@ -99,8 +104,8 @@ function Card({ classItem, handleAddToCart }) {
                 <p><span className="text-[#d74949]">Seats:</span> {classItem.Seats}</p>
                 <p><span className="text-[#d74949]">Students:</span> {classItem.TotalStudent}</p>
                 <p>$ {classItem.Price} (only once) </p>
-                {classItem.Seats > classItem.TotalStudent? <button onClick={() => handleAddToCart(classItem)} className="btn bg-[#b6c278]">Add To Cart</button> : 
-                <button onClick={() => handleAddToCart(classItem)} className="btn bg-[#b6c278]" disabled>Add To Cart</button>
+                {userRole === 'Instructor' || userRole === 'Admin' ? <button onClick={() => handleAddToCart(classItem)} className="btn bg-[#b6c278]" disabled>Add To Cart</button> : 
+                <button onClick={() => handleAddToCart(classItem)} className="btn bg-[#b6c278]" >Add To Cart</button>
                 }
             </div>
         </div>
