@@ -1,30 +1,21 @@
 
 import { Link, Outlet } from "react-router-dom";
-import { FaHome, FaShoppingCart, FaMoneyBill, FaUser,  FaBook  } from "react-icons/fa";
+import { FaHome, FaShoppingCart, FaMoneyBill, FaUser,  FaBook, FaSearch, FaFileContract  } from "react-icons/fa";
+import { IoIosContacts } from "react-icons/io";
+import { useContext, useState } from "react";
+import { AuthContext } from "../provider/AuthProvider";
 
 const Dashboard = () => {
+
+    const {user} = useContext(AuthContext);
+    const [userRoll, setUserRoll] = useState('');
+
+
+    fetch(`http://localhost:5001/users/${user.email}`)
+    .then(response => response.json())
+    .then(data => setUserRoll(data[0]))
+
     return (
-        // <div>
-        //     <div className="drawer mx-14">
-        //         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
-        //         <div className="drawer-content">
-        //             {/* Page content here */}
-        //             <label htmlFor="my-drawer" className="btn bg-[#fdda9b] drawer-button"><RxHamburgerMenu /></label>
-        //         </div>
-        //         <div className="drawer-side">
-        //             <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-        //             <ul className="menu p-4 w-80 min-h-full bg-[#fdda9b] text-white font-bold ">
-        //                 {/* Sidebar content here */}
-        //                 <li><a>User Home</a></li>
-        //                 <li><Link to="/dashboard/mycart">My Cart</Link></li>
-        //                 <li><a>Payment History</a></li>
-        //                 <li><a>Home</a></li>
-        //                 <li><a>Courses</a></li>
-        //                 <li><a>Contact</a></li>
-        //             </ul>
-        //         </div>
-        //     </div>
-        // </div>
 
         <div className="flex ">
 
@@ -40,13 +31,17 @@ const Dashboard = () => {
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                         <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                             {/* Sidebar content here */}
-                            <li className="text-md font-bold"><Link to="/"><FaHome className="text-lg"/> User Home</Link></li>
-                            <li><Link to="cart"><FaShoppingCart className="text-lg" /> Cart</Link></li>
-                            <li><Link to=""  ><FaMoneyBill className="text-lg" />Payment History</Link></li>
-                            <li><Link to="addclass"><FaBook className="text-lg" /> Add Class</Link></li>
-                            <li><Link to="myclass"><FaBook className="text-lg" /> My Classes</Link></li>
-                            <li><Link to="allclass"><FaBook className="text-lg" /> All Classes</Link></li>
-                            <li><Link to="manageusers"><FaUser className="text-lg"/>   Manage Users</Link></li>
+                            <li className="text-lg font-bold"><Link to="/dashboard"><FaHome className="text-lg"/> User Home</Link></li>
+                            {userRoll === 'Student' && <li className="text-lg font-bold"><Link to="cart"><FaShoppingCart className="text-lg" /> Cart</Link></li>}
+                            {userRoll === 'Student' && <li className="text-lg font-bold"><Link to=""  ><FaMoneyBill className="text-lg" />Payment History</Link></li>}
+                            {userRoll === 'Instructor' && <li className="text-lg font-bold"><Link to="addclass"><FaBook className=" text-lg" /> Add Class</Link></li>}
+                            {userRoll === 'Instructor' && <li className="text-lg font-bold"><Link to="myclass"><FaBook className="text-lg" /> My Classes</Link></li>}
+                            {userRoll === 'Admin' && <li className="text-lg font-bold"><Link to="allclass"><FaBook className="text-lg" /> All Classes</Link></li>}
+                            {userRoll === 'Admin' && <li className="text-lg font-bold"><Link to="manageusers"><FaUser className="text-lg"/>   Manage Users</Link></li>}
+                            <div className="divider"></div>
+                            <li className="text-lg font-bold"><Link to="/"><FaHome className="text-lg"/> Home</Link></li>
+                            <li className="text-lg font-bold"><Link to="/classespage"><FaSearch className="text-lg"/> Popular Classes</Link></li>
+                            <li className="text-lg font-bold"><Link to="/"><IoIosContacts /> Contact</Link></li>
                             {/* <li><a>Home</a></li>
                             <li><a>Courses</a></li>
                             <li><a>Contact</a></li> */}
@@ -57,6 +52,7 @@ const Dashboard = () => {
             </div>
 
             <div className="w-full">
+                <p className="mt-5 ml-10 text-lg ">Hi, <span className="text-primary1"> {user?.displayName}</span>, Welcome to the {userRoll} Dashboard</p>
                 <Outlet></Outlet>
             </div>
         </div>

@@ -29,6 +29,7 @@ const ClassesPage = () => {
             const orderedClass = { classItemId: item._id, ClassName: item.ClassName, InstructorName: item.InstructorName, Email: item.Email, Price: item.Price, UserEmail: user.email };
     
             if (user && user.email) {
+                // Method1: Regular way
                 // fetch('http://localhost:5001/carts', {
                 //     method: 'POST',
                 //     headers: {
@@ -38,6 +39,7 @@ const ClassesPage = () => {
                 // })
                 // .then(response => response.json())
 
+                // Method2: Using axios in post function, cause post function in axios is easy
                 axios.post('http://localhost:5001/carts', orderedClass)
                     .then(data => {
                         if (data.data.insertedId) {

@@ -32,6 +32,7 @@ const Registration = () => {
                         // Now the profile is updated, save the user with the correct name
                         const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role: role, img: photo };
                         
+                        // Method1: Regular way
                         // fetch('http://localhost:5001/users', {
                         //     method: 'POST',
                         //     headers: {
@@ -40,6 +41,8 @@ const Registration = () => {
                         //     body: JSON.stringify(saveUser)
                         // })
                         // .then(response => response.json())
+
+                        // Method2: Using axios in post function, cause post function in axios is easy
                         axios.post('http://localhost:5001/users', saveUser)
                         .then(() => {
                             setSuccess('User created successfully! Go to Login Page'); // Display account created message

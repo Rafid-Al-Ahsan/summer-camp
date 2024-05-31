@@ -90,7 +90,7 @@ const AddClass = () => {
                     </div>
                     <div className="form-control">
                         <div className="form-control mt-6">
-                            <button className="btn bg-[#a3174f]">Add Class</button>
+                            <button className="btn bg-primary1">Add Class</button>
                         </div>
 
                     </div>
