@@ -17,6 +17,7 @@ import InstructorPage from "../InstructorPage";
 import ClassesPage from "../ClassesPage";
 import PrivateRoute from "../../provider/PrivateRoute";
 import Payment from "../../Payment/Payment";
+import Notfound from "../Notfound";
 
 const router = createBrowserRouter([
   {
@@ -64,23 +65,27 @@ const router = createBrowserRouter([
       {
         path: "allclass",
         element: <AllClasses></AllClasses>,
-        loader: ({ params }) => fetch('http://localhost:5001/classes')
+        loader: ({ params }) => fetch('https://summer-camp-server-two-topaz.vercel.app/classes')
       },
       {
         path: "updateclass/:id",
         element: <UpdateClass></UpdateClass>,
-        loader: ({ params }) => fetch(`http://localhost:5001/classes/${params.id}`)
+        loader: ({ params }) => fetch(`https://summer-camp-server-two-topaz.vercel.app/classes/${params.id}`)
       },
       {
         path: "manageusers",
         element: <ManageUsers></ManageUsers>
-        // loader: ({ params }) => fetch('http://localhost:5001/users')
+        // loader: ({ params }) => fetch('https://summer-camp-server-two-topaz.vercel.app/users')
       },
       {
         path: "payment",
         element: <Payment></Payment>
       },
     ]  
+  },
+  {
+    path: "*",
+    element: <Notfound></Notfound>
   },
 
 ]);

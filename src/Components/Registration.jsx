@@ -33,7 +33,7 @@ const Registration = () => {
                         const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role: role, img: photo };
                         
                         // Method1: Regular way
-                        // fetch('http://localhost:5001/users', {
+                        // fetch('https://summer-camp-server-two-topaz.vercel.app/users', {
                         //     method: 'POST',
                         //     headers: {
                         //         'content-type': 'application/json'
@@ -43,7 +43,7 @@ const Registration = () => {
                         // .then(response => response.json())
 
                         // Method2: Using axios in post function, cause post function in axios is easy
-                        axios.post('http://localhost:5001/users', saveUser)
+                        axios.post('https://summer-camp-server-two-topaz.vercel.app/users', saveUser)
                         .then(() => {
                             setSuccess('User created successfully! Go to Login Page'); // Display account created message
                             event.target.reset(); // Reset the form after successful account creation

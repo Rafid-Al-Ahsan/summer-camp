@@ -8,7 +8,7 @@ const ManageUsers = () => {
     const [users, setUsers] = useState([]);
 
    
-        fetch(`http://localhost:5001/users`, {
+        fetch(`https://summer-camp-server-two-topaz.vercel.app/users`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('user-access-token')}`
@@ -22,7 +22,7 @@ const ManageUsers = () => {
         const value = "Instructor";
         const role = {value}; 
 
-        fetch(`http://localhost:5001/users/${id}`,{
+        fetch(`https://summer-camp-server-two-topaz.vercel.app/users/${id}`,{
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -46,7 +46,7 @@ const ManageUsers = () => {
             const value = "Admin";
             const role = {value}; 
 
-            fetch(`http://localhost:5001/users/${id}`,{
+            fetch(`https://summer-camp-server-two-topaz.vercel.app/users/${id}`,{
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'

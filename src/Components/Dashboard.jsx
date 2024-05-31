@@ -11,7 +11,7 @@ const Dashboard = () => {
     const [userRoll, setUserRoll] = useState('');
 
 
-    fetch(`http://localhost:5001/users/${user.email}`)
+    fetch(`https://summer-camp-server-two-topaz.vercel.app/users/${user.email}`)
     .then(response => response.json())
     .then(data => setUserRoll(data[0]))
 

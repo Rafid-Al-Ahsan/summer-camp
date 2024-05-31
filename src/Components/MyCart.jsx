@@ -9,7 +9,7 @@ const MyCart = () => {
     const handleDelete = async (id, name) => {
         const result = confirm(`Are you sure you want to delete this class ${name}`);
         if (result === true) {
-            const response = await fetch(`http://localhost:5001/carts/${id}`, {
+            const response = await fetch(`https://summer-camp-server-two-topaz.vercel.app/carts/${id}`, {
                 method: 'DELETE',
             });
             const data = await response.json();

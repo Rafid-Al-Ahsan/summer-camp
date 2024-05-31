@@ -14,7 +14,7 @@ const UpdateClass = () => {
         const updateClass = {classname, img,  price, seat} ;
 
 
-        fetch(`http://localhost:5001/classes/${loader._id}`,{
+        fetch(`https://summer-camp-server-two-topaz.vercel.app/classes/${loader._id}`,{
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

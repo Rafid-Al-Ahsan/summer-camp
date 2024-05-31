@@ -19,12 +19,12 @@ const PopularClass = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    fetch(`http://localhost:5001/users/${user?.email}`)
+    fetch(`https://summer-camp-server-two-topaz.vercel.app/users/${user?.email}`)
     .then(response => response.json())
     .then(data => setUserRole(data[0]))
 
     useEffect(() => {
-        fetch('http://localhost:5001/classes')
+        fetch('https://summer-camp-server-two-topaz.vercel.app/classes')
             .then(response => response.json())
             .then(data => setMusicClasses(data))
     }, []); // Add an empty dependency array to run the effect only once after the component mounts
@@ -34,7 +34,7 @@ const PopularClass = () => {
         const orderedClass = { classItemId: item._id, ClassName: item.ClassName, InstructorName: item.InstructorName, Email: item.Email, Price: item.Price, UserEmail: user.email };
 
         if (user && user.email) {
-            fetch('http://localhost:5001/carts', {
+            fetch('https://summer-camp-server-two-topaz.vercel.app/carts', {
                 method: 'POST',
                 headers: {
                     "content-type": "application/json"

@@ -10,7 +10,7 @@ const useCart = () => {
     // const [course, setCourse] = useState([]);
 
     // useEffect(() => {
-    //     fetch(`http://localhost:5001/carts/${user?.email}`)
+    //     fetch(`https://summer-camp-server-two-topaz.vercel.app/carts/${user?.email}`)
     //     .then(response => response.json())
     //     .then(data => {
     //         setCourse(data); 
@@ -24,7 +24,7 @@ const useCart = () => {
     const { refetch, data: cart= [], } = useQuery({
         queryKey: ['carts', user?.email],
         queryFn: async () => {
-            const response = await fetch(`http://localhost:5001/carts/${user?.email}`,{
+            const response = await fetch(`https://summer-camp-server-two-topaz.vercel.app/carts/${user?.email}`,{
                 method: 'GET',
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('user-access-token')}`

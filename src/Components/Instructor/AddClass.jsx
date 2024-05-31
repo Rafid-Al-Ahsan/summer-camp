@@ -23,7 +23,7 @@ const AddClass = () => {
         const course = { ClassName, Img, InstructorName, Email, Seats, Price, TotalStudent, Status, Feedback};
         console.log(course);
 
-        fetch('http://localhost:5001/classes', {    
+        fetch('https://summer-camp-server-two-topaz.vercel.app/classes', {    
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",

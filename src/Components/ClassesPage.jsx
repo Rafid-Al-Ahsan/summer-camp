@@ -19,12 +19,12 @@ const ClassesPage = () => {
         const navigate = useNavigate();
         const location = useLocation();
 
-        fetch(`http://localhost:5001/users/${user?.email}`)
+        fetch(`https://summer-camp-server-two-topaz.vercel.app/users/${user?.email}`)
         .then(response => response.json())
         .then(data => setUserRole(data[0]))
     
         useEffect(() => {
-            fetch('http://localhost:5001/classes')
+            fetch('https://summer-camp-server-two-topaz.vercel.app/classes')
                 .then(response => response.json())
                 .then(data => setMusicClasses(data))
         }, []); // Add an empty dependency array to run the effect only once after the component mounts
@@ -35,7 +35,7 @@ const ClassesPage = () => {
     
             if (user && user.email) {
                 // Method1: Regular way
-                // fetch('http://localhost:5001/carts', {
+                // fetch('https://summer-camp-server-two-topaz.vercel.app/carts', {
                 //     method: 'POST',
                 //     headers: {
                 //         "content-type": "application/json"
@@ -45,7 +45,7 @@ const ClassesPage = () => {
                 // .then(response => response.json())
 
                 // Method2: Using axios in post function, cause post function in axios is easy
-                axios.post('http://localhost:5001/carts', orderedClass)
+                axios.post('https://summer-camp-server-two-topaz.vercel.app/carts', orderedClass)
                     .then(data => {
                         if (data.data.insertedId) {
                             refetch();

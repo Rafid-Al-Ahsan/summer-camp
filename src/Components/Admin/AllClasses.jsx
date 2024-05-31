@@ -23,7 +23,7 @@ const AllClasses = () => {
 
         const adminFeedback = {feedback} ;
 
-        fetch(`http://localhost:5001/classes/feedback/${selectedCourseId}`,{
+        fetch(`https://summer-camp-server-two-topaz.vercel.app/classes/feedback/${selectedCourseId}`,{
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -43,7 +43,7 @@ const AllClasses = () => {
         const value = "Approved";
         const approved = {value}; 
 
-        fetch(`http://localhost:5001/classes/status/${id}`, {
+        fetch(`https://summer-camp-server-two-topaz.vercel.app/classes/status/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -69,7 +69,7 @@ const AllClasses = () => {
         const value = "Denied";
         const approved = {value}; 
 
-        fetch(`http://localhost:5001/classes/status/${id}`, {
+        fetch(`https://summer-camp-server-two-topaz.vercel.app/classes/status/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

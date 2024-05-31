@@ -39,7 +39,7 @@ const Login = () => {
                 const loggedUser = {
                     email: user.email
                 }
-                fetch('http://localhost:5001/jwt', {
+                fetch('https://summer-camp-server-two-topaz.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -77,7 +77,7 @@ const Login = () => {
                     email : loggedInUser.email
                 }
 
-                fetch('http://localhost:5001/jwt', {
+                fetch('https://summer-camp-server-two-topaz.vercel.app/jwt', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'
@@ -92,7 +92,7 @@ const Login = () => {
                 })// end of (jwt)
                 
                 
-                fetch('http://localhost:5001/users', {
+                fetch('https://summer-camp-server-two-topaz.vercel.app/users', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'
