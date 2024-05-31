@@ -16,6 +16,7 @@ import ManageUsers from "../Admin/ManageUsers";
 import InstructorPage from "../InstructorPage";
 import ClassesPage from "../ClassesPage";
 import PrivateRoute from "../../provider/PrivateRoute";
+import Payment from "../../Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
         path: "manageusers",
         element: <ManageUsers></ManageUsers>
         // loader: ({ params }) => fetch('http://localhost:5001/users')
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>
       },
     ]  
   },

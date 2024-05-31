@@ -1,6 +1,6 @@
 
 import { Link, Outlet } from "react-router-dom";
-import { FaHome, FaShoppingCart, FaMoneyBill, FaUser,  FaBook, FaSearch, FaFileContract  } from "react-icons/fa";
+import { FaHome, FaShoppingCart, FaMoneyBill, FaUser,  FaBook, FaSearch } from "react-icons/fa";
 import { IoIosContacts } from "react-icons/io";
 import { useContext, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
