@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword, getAuth, signOut, updateProfile } from "firebase/auth";
 import app from '../firebase/firebase.config';
+import axios from 'axios';
 
 const Registration = () => {
     const [success, setSuccess] = useState(null);
@@ -31,14 +32,15 @@ const Registration = () => {
                         // Now the profile is updated, save the user with the correct name
                         const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role: role, img: photo };
                         
-                        fetch('http://localhost:5001/users', {
-                            method: 'POST',
-                            headers: {
-                                'content-type': 'application/json'
-                            },
-                            body: JSON.stringify(saveUser)
-                        })
-                        .then(response => response.json())
+                        // fetch('http://localhost:5001/users', {
+                        //     method: 'POST',
+                        //     headers: {
+                        //         'content-type': 'application/json'
+                        //     },
+                        //     body: JSON.stringify(saveUser)
+                        // })
+                        // .then(response => response.json())
+                        axios.post('http://localhost:5001/users', saveUser)
                         .then(() => {
                             setSuccess('User created successfully! Go to Login Page'); // Display account created message
                             event.target.reset(); // Reset the form after successful account creation
@@ -60,7 +62,7 @@ const Registration = () => {
 
     return (
         <div className="hero min-h-screen bg-base-200">
-            <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mt-14">
                 <h3 className="text-3xl font-semibold text-center mt-5 ">Please Register</h3>
                 <form onSubmit={handleRegister} className="card-body">
                     <div className="form-control">
