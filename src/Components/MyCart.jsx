@@ -1,5 +1,5 @@
 import { FaTrashAlt } from "react-icons/fa";
-import useCart from "../hooks/useCart";
+import useCart from "./hooks/useCart";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 

@@ -1,11 +1,11 @@
-    /* eslint-disable no-undef */
-    /* eslint-disable no-unused-vars */
-    /* eslint-disable react/prop-types */
-    import { useContext, useEffect, useState } from "react";
-    import { useLocation, useNavigate } from 'react-router-dom';
-    import { AuthContext } from "../provider/AuthProvider";
-    import Swal from "sweetalert2";
-import useCart from "../hooks/useCart";
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from "./provider/AuthProvider";
+import Swal from "sweetalert2";
+import useCart from "./hooks/useCart";
 import axios from "axios";
 
 const ClassesPage = () => {
@@ -31,7 +31,7 @@ const ClassesPage = () => {
 
 
         const handleAddToCart = item => {
-            const orderedClass = { classItemId: item._id, ClassName: item.ClassName, InstructorName: item.InstructorName, Email: item.Email, Price: item.Price, UserEmail: user.email };
+            const orderedClass = { classItemId: item._id, ClassName: item.ClassName, InstructorName: item.InstructorName, Email: item.Email, Price: item.Price, UserEmail: user?.email , Img: item.Img};
     
             if (user && user.email) {
                 // Method1: Regular way
@@ -95,7 +95,7 @@ export default ClassesPage;
 
 function Card({ classItem, handleAddToCart, userRole }) {
     return (
-        <div className="card w-96 bg-base-100">
+        <div className="card w-96 bg-base-100 mb-5">
             <figure><img className="w-96 h-60" src={classItem.Img} alt="Class" /></figure>
             <div className="card-body text-center">
                 <h2 className="font-bold text-lg">{classItem.ClassName}</h2>

@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import { FaHome, FaShoppingCart, FaMoneyBill, FaUser,  FaBook, FaSearch } from "react-icons/fa";
 import { IoIosContacts } from "react-icons/io";
 import { useContext, useState } from "react";
-import { AuthContext } from "../provider/AuthProvider";
+import { AuthContext } from "./provider/AuthProvider";
 
 const Dashboard = () => {
 
@@ -33,7 +33,7 @@ const Dashboard = () => {
                             {/* Sidebar content here */}
                             <li className="text-lg font-bold"><Link to="/dashboard"><FaHome className="text-lg"/> User Home</Link></li>
                             {userRoll === 'Student' && <li className="text-lg font-bold"><Link to="cart"><FaShoppingCart className="text-lg" /> Cart</Link></li>}
-                            {userRoll === 'Student' && <li className="text-lg font-bold"><Link to=""  ><FaMoneyBill className="text-lg" />Payment History</Link></li>}
+                            {userRoll === 'Student' && <li className="text-lg font-bold"><Link to="/paymenthistory"  ><FaMoneyBill className="text-lg" />Payment History</Link></li>}
                             {userRoll === 'Instructor' && <li className="text-lg font-bold"><Link to="addclass"><FaBook className=" text-lg" /> Add Class</Link></li>}
                             {userRoll === 'Instructor' && <li className="text-lg font-bold"><Link to="myclass"><FaBook className="text-lg" /> My Classes</Link></li>}
                             {userRoll === 'Admin' && <li className="text-lg font-bold"><Link to="allclass"><FaBook className="text-lg" /> All Classes</Link></li>}

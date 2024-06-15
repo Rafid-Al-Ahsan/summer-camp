@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import './index.css'
 import {
   RouterProvider,
 } from "react-router-dom";
-import './index.css'
-import router from "./Components/routes/router"
-import AuthProvider from './provider/AuthProvider';
+import router from './components/routes/router';
+import AuthProvider from '../src/components/provider/AuthProvider';
 import {
   QueryClient,
   QueryClientProvider,

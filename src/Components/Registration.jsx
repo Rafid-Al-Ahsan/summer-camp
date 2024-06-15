@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { createUserWithEmailAndPassword, getAuth, signOut, updateProfile } from "firebase/auth";
-import app from '../firebase/firebase.config';
+import app from './firebase/firebase.config';
 import axios from 'axios';
 
 const Registration = () => {

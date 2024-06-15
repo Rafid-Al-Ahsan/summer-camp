@@ -3,9 +3,9 @@
 /* eslint-disable react/prop-types */
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from "../provider/AuthProvider";
+import { AuthContext } from "./provider/AuthProvider";
 import Swal from "sweetalert2";
-import useCart from "../hooks/useCart";
+import useCart from "./hooks/useCart";
 
 const PopularClass = () => {
     const [musicClasses, setMusicClasses] = useState([]);
@@ -31,7 +31,7 @@ const PopularClass = () => {
 
 
     const handleAddToCart = item => {
-        const orderedClass = { classItemId: item._id, ClassName: item.ClassName, InstructorName: item.InstructorName, Email: item.Email, Price: item.Price, UserEmail: user.email };
+        const orderedClass = { classItemId: item._id, ClassName: item.ClassName, InstructorName: item.InstructorName, Email: item.Email, Price: item.Price, UserEmail: user?.email, Img: item.Img };
 
         if (user && user.email) {
             fetch('https://summer-camp-server-two-topaz.vercel.app/carts', {
@@ -70,6 +70,7 @@ const PopularClass = () => {
             });
         }
     }
+
 
     // Sort the classes by TotalStudent in descending order
     const sortedClasses = musicClasses.sort((a, b) => b.TotalStudent - a.TotalStudent);

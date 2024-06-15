@@ -1,6 +1,6 @@
 /* eslint-disable no-dupe-keys */
 import { useContext } from 'react';
-import { AuthContext } from '../../provider/AuthProvider';
+import { AuthContext } from './../provider/AuthProvider';
 import Swal from 'sweetalert2';
 
 const AddClass = () => {

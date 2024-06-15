@@ -3,8 +3,8 @@ import { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Icon } from '@iconify/react';  //iconify icons
 import { getAuth, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import app from "./../firebase/firebase.config"
-import { AuthContext } from '../provider/AuthProvider';
+import app from "./firebase/firebase.config"
+import { AuthContext } from './provider/AuthProvider';
 import { GoogleAuthProvider } from "firebase/auth";
 
 

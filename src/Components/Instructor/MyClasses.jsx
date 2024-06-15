@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../provider/AuthProvider';
+import { AuthContext } from './../provider/AuthProvider';
 import { Link } from 'react-router-dom';
 
 const MyClasses = () => {
@@ -16,7 +16,7 @@ const MyClasses = () => {
     }, [user]);
 
     const fetchCourses = async () => {
-        const response = await fetch(`https://summer-camp-server-two-topaz.vercel.app/classes/email/${user.email}`, {
+        const response = await fetch(`https://summer-camp-server-two-topaz.vercel.app/payments/${user.email}`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('user-access-token')}`
