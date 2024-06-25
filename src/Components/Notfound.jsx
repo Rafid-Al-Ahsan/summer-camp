@@ -2,7 +2,7 @@
 const Notfound = () => {
     return (
         <div>
-            <img src='https://i.ibb.co/rkwZCrc/404.png' alt=""  className='m-auto'/>
+            <img src='https://i.ibb.co/FY9Tbbv/404.jpg' alt=""  className='m-auto'/>
         </div>
     );
 };

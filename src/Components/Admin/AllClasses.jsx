@@ -1,47 +1,79 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
-import {useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
-// // TODO: 1) use refetch or useEffect for showing pending status
-//          2) Disable feedback button after submission 
-//          3) Put some header and colors 
-
 const AllClasses = () => {
-    const loader = useLoaderData();
     const [feedback, setFeedback] = useState('');
     const [selectedCourseId, setSelectedCourseId] = useState('');
+    const [loader, setLoader] = useState([])
+
+    const [refetch, setRefetch] = useState(false);
+
+    useEffect(() => {
+        fetch('https://summer-camp-server-two-topaz.vercel.app/classes')
+            .then(response => response.json())
+            .then(data => setLoader(data))
+    }, [refetch])
+
 
     const handleFeedbackChange = (event) => {
         setFeedback(event.target.value);
     };
 
-    const handleSubmit = (event) => {   
+    const handleSubmit = (event) => {
         event.preventDefault();
         document.getElementById('my_modal_1').close();
 
-        const adminFeedback = {feedback} ;
+        const adminFeedback = { feedback };
 
-        fetch(`https://summer-camp-server-two-topaz.vercel.app/classes/feedback/${selectedCourseId}`,{
+        fetch(`https://summer-camp-server-two-topaz.vercel.app/classes/feedback/${selectedCourseId}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(adminFeedback)
         })
-    };  
+            .then(() => {
+                const value = "Denied";
+                const approved = {value}; 
 
-    const openModal = (courseId) => {
-        setSelectedCourseId(courseId);
-        document.getElementById('my_modal_1').showModal();
+
+                fetch(`https://summer-camp-server-two-topaz.vercel.app/classes/status/${selectedCourseId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(approved)
+                })
+                .then(() => {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "error",
+                        title: "The class has been denied",
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                    setRefetch(true);  
+                })
+                .catch((error) => {
+                    console.log(error);
+                })
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+
+
+
+
     };
 
 
     const handelApprove = (id) => {
 
         const value = "Approved";
-        const approved = {value}; 
+        const approved = { value };
 
         fetch(`https://summer-camp-server-two-topaz.vercel.app/classes/status/${id}`, {
             method: 'PUT',
@@ -50,44 +82,51 @@ const AllClasses = () => {
             },
             body: JSON.stringify(approved)
         })
-        .then(() => {
-            Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "The class has been approved",
-                showConfirmButton: false,
-                timer: 1500
-              });
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+            .then(() => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "The class has been approved",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                setRefetch(true);
+
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
-    const handelDeny = (id) => {
+    const handelDeny = async (id) => {
 
-        const value = "Denied";
-        const approved = {value}; 
+        setSelectedCourseId(id);
+        document.getElementById('my_modal_1').showModal();
 
-        fetch(`https://summer-camp-server-two-topaz.vercel.app/classes/status/${id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(approved)
-        })
-        .then(() => {
-            Swal.fire({
-                position: "top-end",
-                icon: "error",
-                title: "The class has been denied",
-                showConfirmButton: false,
-                timer: 1500
-              });
-        })
-        .catch((error) => {
-            console.log(error);
-        })
+        // const value = "Denied";
+        // const approved = {value}; 
+
+
+        // fetch(`https://summer-camp-server-two-topaz.vercel.app/classes/status/${id}`, {
+        //     method: 'PUT',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(approved)
+        // })
+        // .then(() => {
+        //     Swal.fire({
+        //         position: "top-end",
+        //         icon: "error",
+        //         title: "The class has been denied",
+        //         showConfirmButton: false,
+        //         timer: 1500
+        //       });
+        //     setRefetch(true);  
+        // })
+        // .catch((error) => {
+        //     console.log(error);
+        // })
     }
 
     return (
@@ -106,7 +145,7 @@ const AllClasses = () => {
                             <th>Status</th>
                             <th></th>
                             <th></th>
-                            <th></th>
+                            {/* <th></th> */}
                         </tr>
                     </thead>
                     <tbody>
@@ -133,26 +172,26 @@ const AllClasses = () => {
                                 {course.Status === "Pending" && <td className="text-[#ffc107]">{course.Status}</td>}
                                 {course.Status === "Approved" && <td className="text-[#198754]">{course.Status}</td>}
                                 {course.Status === "Denied" && <td className="text-[#dc3545]">{course.Status}</td>}
-                                
+
                                 {/* Approve button with conditional rendering */}
                                 <td>
-                                    {course.Status === "Approved" || course.Status === "Denied"? 
-                                    <button className="btn bg-[#0d6efd] text-white btm-md" onClick={() => handelApprove(course._id)} disabled>Approve</button> : 
-                                    <button className="btn bg-[#0d6efd] text-white btm-md" onClick={() => handelApprove(course._id)} >Approve</button>}
+                                    {course.Status === "Approved" || course.Status === "Denied" ?
+                                        <button className="btn bg-[#0d6efd] text-white btm-md" onClick={() => handelApprove(course._id)} disabled>Approve</button> :
+                                        <button className="btn bg-[#0d6efd] text-white btm-md" onClick={() => handelApprove(course._id)} >Approve</button>}
                                 </td>
 
                                 {/* Deny button with conditional rendering */}
                                 <td>
-                                    {course.Status === "Approved" || course.Status === "Denied"?
-                                    <button className="btn bg-[#dc3545] text-white btn-md" onClick={() => handelDeny(course._id)}disabled>Deny</button> : 
-                                    <button className="btn bg-[#dc3545] text-white btn-md" onClick={() => handelDeny(course._id)}>Deny</button>
+                                    {course.Status === "Approved" || course.Status === "Denied" ?
+                                        <button className="btn bg-[#dc3545] text-white btn-md" onClick={() => handelDeny(course._id)} disabled>Deny</button> :
+                                        <button className="btn bg-[#dc3545] text-white btn-md" onClick={() => handelDeny(course._id)} >Deny</button>
                                     }
                                 </td>
 
-                                <td>
+                                {/* <td>
                                     {course.Feedback != "" ? 
                                     <button className="btn" onClick={() => openModal(course._id)}disabled>Feedback</button> : <button className="btn" onClick={() => openModal(course._id)}>Feedback</button>}
-                                </td>
+                                </td> */}
                             </tr>
                         ))}
                     </tbody>

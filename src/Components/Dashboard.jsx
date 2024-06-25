@@ -1,7 +1,7 @@
 
 import { Link, Outlet } from "react-router-dom";
 import { FaHome, FaShoppingCart, FaMoneyBill, FaUser,  FaBook, FaSearch } from "react-icons/fa";
-import { IoIosContacts } from "react-icons/io";
+// import { IoIosContacts } from "react-icons/io";
 import { useContext, useState } from "react";
 import { AuthContext } from "./provider/AuthProvider";
 
@@ -31,9 +31,9 @@ const Dashboard = () => {
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                         <ul className="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
                             {/* Sidebar content here */}
-                            <li className="text-lg font-bold"><Link to="/dashboard"><FaHome className="text-lg"/> User Home</Link></li>
+                            <li className="text-lg font-bold"><Link to="/dashboard"><FaHome className="text-lg"/>Dashboard</Link></li>
                             {userRoll === 'Student' && <li className="text-lg font-bold"><Link to="cart"><FaShoppingCart className="text-lg" /> Cart</Link></li>}
-                            {userRoll === 'Student' && <li className="text-lg font-bold"><Link to="/paymenthistory"  ><FaMoneyBill className="text-lg" />Payment History</Link></li>}
+                            {userRoll === 'Student' && <li className="text-lg font-bold"><Link to="/dashboard/paymenthistory"  ><FaMoneyBill className="text-lg" />Payment History</Link></li>}
                             {userRoll === 'Instructor' && <li className="text-lg font-bold"><Link to="addclass"><FaBook className=" text-lg" /> Add Class</Link></li>}
                             {userRoll === 'Instructor' && <li className="text-lg font-bold"><Link to="myclass"><FaBook className="text-lg" /> My Classes</Link></li>}
                             {userRoll === 'Admin' && <li className="text-lg font-bold"><Link to="allclass"><FaBook className="text-lg" /> All Classes</Link></li>}
@@ -41,7 +41,7 @@ const Dashboard = () => {
                             <div className="divider"></div>
                             <li className="text-lg font-bold"><Link to="/"><FaHome className="text-lg"/> Home</Link></li>
                             <li className="text-lg font-bold"><Link to="/classespage"><FaSearch className="text-lg"/> Popular Classes</Link></li>
-                            <li className="text-lg font-bold"><Link to="/"><IoIosContacts /> Contact</Link></li>
+                            {/* <li className="text-lg font-bold"><Link to="/"><IoIosContacts /> Contact</Link></li> */}
                             {/* <li><a>Home</a></li>
                             <li><a>Courses</a></li>
                             <li><a>Contact</a></li> */}

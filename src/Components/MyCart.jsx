@@ -23,7 +23,7 @@ const MyCart = () => {
     };
 
     // Calculate the total price using reduce
-    const totalPrice = classes.reduce((accumulator, currentClass) => accumulator + currentClass.Price, 0);
+    const totalPrice = classes?.reduce((accumulator, currentClass) => accumulator + currentClass.Price, 0);
 
     return (
         <div>

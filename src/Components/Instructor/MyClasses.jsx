@@ -16,7 +16,7 @@ const MyClasses = () => {
     }, [user]);
 
     const fetchCourses = async () => {
-        const response = await fetch(`https://summer-camp-server-two-topaz.vercel.app/payments/${user.email}`, {
+        const response = await fetch(`https://summer-camp-server-two-topaz.vercel.app/classes/email/${user.email}`, {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('user-access-token')}`
